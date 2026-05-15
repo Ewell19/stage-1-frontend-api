@@ -8,6 +8,7 @@ React + Vite frontend for the News Explorer project.
 - Pull Request: ADD_YOUR_PR_URL_HERE
 - Repository: git@github.com:Ewell19/stage-1-frontend-api.git
 - Video Pitch (Loom): https://www.loom.com/share/976ea0ef669b41d7be1c7fa05f15d6cc
+- Submission Branch: stage-1-submission-pr
 
 ## Tech Stack
 

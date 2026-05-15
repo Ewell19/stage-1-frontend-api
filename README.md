@@ -6,6 +6,8 @@ React + Vite frontend for the News Explorer project.
 
 - Frontend (GitHub Pages): ADD_YOUR_GITHUB_PAGES_URL_HERE
 - Pull Request: ADD_YOUR_PR_URL_HERE
+- Repository: git@github.com:Ewell19/stage-1-frontend-api.git
+- Video Pitch (Loom): https://www.loom.com/share/976ea0ef669b41d7be1c7fa05f15d6cc
 
 ## Tech Stack
 
@@ -64,7 +66,10 @@ npm run dev
 ## Notes
 
 - News requests use NewsAPI (`src/utils/api.js`).
-- Current auth and saved article persistence are localStorage-based in this frontend project.
+- Stage 1 backend simulation is implemented with promise-based helpers:
+  - `src/utils/auth.js` simulates `/signup`, `/signin`, and token validation (`checkToken`).
+  - `src/utils/api.js` simulates saved-articles CRUD responses while keeping real NewsAPI search.
+- Auth/session and saved-article data are persisted in localStorage for demo purposes.
 
 ## Deployment (GitHub Pages)
 

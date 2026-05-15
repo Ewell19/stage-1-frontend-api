@@ -4,9 +4,8 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import SavedNews from "../../pages/SavedNews";
+import { AUTH_TOKEN_KEY, checkToken } from "../../utils/auth";
 import "./App.css";
-
-const CURRENT_USER_STORAGE_KEY = "newsExplorerCurrentUser";
 
 const normalizeValue = (value) =>
   String(value || "")
@@ -16,36 +15,41 @@ const normalizeValue = (value) =>
 const getProfilePhotoKey = (user) =>
   user?.email ? `profilePhoto:${normalizeValue(user.email)}` : null;
 
-const loadStoredUser = () => {
-  try {
-    const rawUser = localStorage.getItem(CURRENT_USER_STORAGE_KEY);
-    if (!rawUser) return null;
-
-    const parsedUser = JSON.parse(rawUser);
-    if (!parsedUser?.email) return null;
-
-    return {
-      name: parsedUser.name || parsedUser.email.split("@")[0] || "User",
-      email: normalizeValue(parsedUser.email),
-    };
-  } catch {
-    return null;
-  }
-};
-
 const App = () => {
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [user, setUser] = useState(loadStoredUser);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (user?.email) {
-      localStorage.setItem(CURRENT_USER_STORAGE_KEY, JSON.stringify(user));
-      return;
-    }
+    let isCancelled = false;
 
-    localStorage.removeItem(CURRENT_USER_STORAGE_KEY);
-  }, [user]);
+    const bootstrapUser = async () => {
+      const token = localStorage.getItem(AUTH_TOKEN_KEY);
+
+      if (!token) {
+        setUser(null);
+        return;
+      }
+
+      try {
+        const result = await checkToken(token);
+        if (!isCancelled) {
+          setUser(result.data);
+        }
+      } catch {
+        localStorage.removeItem(AUTH_TOKEN_KEY);
+        if (!isCancelled) {
+          setUser(null);
+        }
+      }
+    };
+
+    bootstrapUser();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     const profilePhotoKey = getProfilePhotoKey(user);

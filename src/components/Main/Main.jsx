@@ -3,12 +3,12 @@ import "./Main.css";
 import About from "../About/About";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import Preloader from "../Preloader/Preloader";
-import { fetchNews } from "../../utils/api";
 import {
+  fetchNews,
   getSavedArticles,
-  saveArticle,
   removeArticle,
-} from "../../utils/savedArticles";
+  saveArticle,
+} from "../../utils/api";
 import notFoundIcon from "../../images/not-found.svg";
 
 const Main = ({ profilePhoto, onEditPhoto, user }) => {
@@ -20,27 +20,56 @@ const Main = ({ profilePhoto, onEditPhoto, user }) => {
 
   // Load saved articles when user changes
   useEffect(() => {
-    if (user?.email) {
-      const saved = getSavedArticles(user.email);
-      setSavedUrls(saved.map((a) => a.url));
-    } else {
-      setSavedUrls([]);
-    }
+    let isCancelled = false;
+
+    const loadSavedUrls = async () => {
+      if (!user?.email) {
+        setSavedUrls([]);
+        return;
+      }
+
+      try {
+        const saved = await getSavedArticles(user.email);
+        if (!isCancelled) {
+          setSavedUrls(saved.map((article) => article.url));
+        }
+      } catch {
+        if (!isCancelled) {
+          setSavedUrls([]);
+        }
+      }
+    };
+
+    loadSavedUrls();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [user]);
 
-  const handleSaveArticle = (article) => {
+  const handleSaveArticle = async (article) => {
     if (!user?.email) return;
-    saveArticle(user.email, {
-      ...article,
-      keyword: query.trim() || article.keyword || "General",
-    });
-    setSavedUrls((prev) => [...prev, article.url]);
+
+    try {
+      await saveArticle(user.email, {
+        ...article,
+        keyword: query.trim() || article.keyword || "General",
+      });
+      setSavedUrls((prev) => [...prev, article.url]);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleRemoveArticle = (articleUrl) => {
+  const handleRemoveArticle = async (articleUrl) => {
     if (!user?.email) return;
-    removeArticle(user.email, articleUrl);
-    setSavedUrls((prev) => prev.filter((url) => url !== articleUrl));
+
+    try {
+      await removeArticle(user.email, articleUrl);
+      setSavedUrls((prev) => prev.filter((url) => url !== articleUrl));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleSearch = async (e) => {

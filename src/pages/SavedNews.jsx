@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Preloader from "../components/Preloader/Preloader";
 import "../styles/SavedNews.css";
-import { getSavedArticles, removeArticle } from "../utils/savedArticles";
+import { getSavedArticles, removeArticle } from "../utils/api";
 import trashIcon from "../images/trash.svg";
 
 const formatDate = (dateStr) => {
@@ -31,22 +31,51 @@ const SavedNews = ({ user }) => {
   })();
 
   useEffect(() => {
-    if (!user?.email) {
-      setArticles([]);
-      setIsLoading(false);
-      return;
-    }
+    let isCancelled = false;
 
-    setIsLoading(true);
-    const saved = getSavedArticles(user.email);
-    setArticles(saved);
-    setIsLoading(false);
+    const loadSavedArticles = async () => {
+      if (!user?.email) {
+        setArticles([]);
+        setIsLoading(false);
+        return;
+      }
+
+      setIsLoading(true);
+
+      try {
+        const saved = await getSavedArticles(user.email);
+        if (!isCancelled) {
+          setArticles(saved);
+        }
+      } catch {
+        if (!isCancelled) {
+          setArticles([]);
+        }
+      } finally {
+        if (!isCancelled) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    loadSavedArticles();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [user]);
 
-  const handleRemoveArticle = (articleUrl) => {
+  const handleRemoveArticle = async (articleUrl) => {
     if (!user?.email) return;
-    removeArticle(user.email, articleUrl);
-    setArticles((prev) => prev.filter((a) => a.url !== articleUrl));
+
+    try {
+      await removeArticle(user.email, articleUrl);
+      setArticles((prev) =>
+        prev.filter((article) => article.url !== articleUrl),
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   if (!user) {

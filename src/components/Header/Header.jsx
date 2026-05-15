@@ -4,23 +4,9 @@ import "./Header.css";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import ProfileModal from "../ProfileModal/ProfileModal";
+import { authorize, register, signOut } from "../../utils/auth";
 import bellIcon from "../../images/icons/Bell.svg";
 import userIcon from "../../images/icons/User.svg";
-
-const USERS_STORAGE_KEY = "newsExplorerUsers";
-
-const loadUsers = () => {
-  try {
-    const rawUsers = localStorage.getItem(USERS_STORAGE_KEY);
-    return rawUsers ? JSON.parse(rawUsers) : [];
-  } catch {
-    return [];
-  }
-};
-
-const saveUsers = (users) => {
-  localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
-};
 
 const normalizeValue = (value) =>
   String(value || "")
@@ -66,11 +52,6 @@ const Header = ({
   };
 
   const handleSignUpSubmit = async (data) => {
-    console.log("Register:", data);
-    const users = loadUsers();
-    const normalizedName = normalizeValue(data.username);
-    const normalizedEmail = normalizeValue(data.email);
-
     if (!/^[A-Za-z0-9._-]{2,30}$/.test(data.username.trim())) {
       return {
         ok: false,
@@ -111,79 +92,42 @@ const Header = ({
       };
     }
 
-    if (normalizedName === "player one") {
-      return {
-        ok: false,
-        field: "username",
-        error: "This username has been taken.",
-      };
-    }
-
-    if (
-      users.some((item) => normalizeValue(item.username) === normalizedName)
-    ) {
-      return {
-        ok: false,
-        field: "username",
-        error: "This username has been taken.",
-      };
-    }
-
-    if (users.some((item) => normalizeValue(item.email) === normalizedEmail)) {
-      return {
-        ok: false,
-        field: "email",
-        error: "This email has been taken.",
-      };
-    }
-
-    saveUsers([
-      ...users,
-      {
-        username: data.username.trim(),
-        email: normalizedEmail,
+    try {
+      const result = await register({
+        name: data.username.trim(),
+        email: normalizeValue(data.email),
         password: data.password,
-      },
-    ]);
+      });
 
-    onUserChange({ name: data.username.trim(), email: normalizedEmail });
-    return { ok: true };
+      onUserChange(result.data);
+      setIsRegisterOpen(false);
+      return { ok: true };
+    } catch (error) {
+      return {
+        ok: false,
+        field: error.field || "email",
+        error: error.message || "Unable to create account",
+      };
+    }
   };
 
-  const handleLoginSubmit = (data) => {
-    console.log("Login:", data);
-
-    const users = loadUsers();
-    const normalizedEmail = normalizeValue(data.email);
-    const matchedUser = users.find(
-      (item) => normalizeValue(item.email) === normalizedEmail,
-    );
-
-    if (!matchedUser) {
+  const handleLoginSubmit = async (data) => {
+    try {
+      const result = await authorize(normalizeValue(data.email), data.password);
+      onUserChange(result.data);
+      setIsLoginOpen(false);
+      return { ok: true };
+    } catch (error) {
       return {
         ok: false,
-        field: "password",
-        error: "Invalid password",
+        field: error.field || "password",
+        error: error.message || "Invalid password",
       };
     }
-
-    if (matchedUser.password !== data.password) {
-      return {
-        ok: false,
-        field: "password",
-        error: "Invalid password",
-      };
-    }
-
-    onUserChange({
-      name: matchedUser.username || data.email.split("@")[0] || "User",
-      email: normalizeValue(matchedUser.email || data.email),
-    });
-    setIsLoginOpen(false);
-    return { ok: true };
   };
 
   const handleLogout = () => {
+    signOut();
     onUserChange(null);
     setUserMenuOpen(false);
   };

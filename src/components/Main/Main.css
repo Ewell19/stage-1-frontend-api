@@ -1,0 +1,394 @@
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  min-height: 576px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    url("../../images/hero-bg.jpg") center/cover no-repeat,
+    #1a2744;
+  overflow: hidden;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 39, 68, 0.35) 0%,
+    rgba(26, 39, 68, 0.25) 100%
+  );
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1440px;
+  padding: 172px 104px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hero__title {
+  margin: 0;
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+  max-width: 620px;
+}
+
+.hero__subtitle {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 600px;
+}
+
+.hero__search {
+  display: flex;
+  margin-top: 16px;
+  max-width: 608px;
+  background: #fff;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.hero__input {
+  flex: 1;
+  height: 64px;
+  border: none;
+  outline: none;
+  padding: 0 24px;
+  font-size: 16px;
+  color: #1f1f1f;
+  background: transparent;
+}
+
+.hero__input::placeholder {
+  color: #b8b8b8;
+}
+
+.hero__search-btn {
+  height: 64px;
+  padding: 0 40px;
+  border: none;
+  border-radius: 40px;
+  background: #2f71e5;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-left: 0;
+  margin-right: 0;
+  align-self: flex-start;
+  transition: background 0.2s ease;
+}
+
+.hero__search-btn:hover {
+  background: #1a5cd1;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero {
+    min-height: 400px;
+  }
+
+  .hero__content {
+    padding: 108px 40px 46px;
+    gap: 14px;
+  }
+
+  .hero__title {
+    font-size: 40px;
+    line-height: 1.15;
+    max-width: 420px;
+  }
+
+  .hero__subtitle {
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 420px;
+  }
+
+  .hero__search {
+    margin-top: 8px;
+    max-width: 452px;
+  }
+
+  .hero__input,
+  .hero__search-btn {
+    height: 56px;
+    font-size: 15px;
+  }
+
+  .hero__search-btn {
+    padding: 0 34px;
+  }
+
+  .search-status {
+    padding: 40px;
+  }
+
+  .search-status--loading {
+    min-height: 240px;
+  }
+
+  .search-status--empty {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    min-height: 520px;
+  }
+
+  .hero__title {
+    font-size: 40px;
+    line-height: 1.1;
+    max-width: 100%;
+  }
+
+  .hero__content {
+    padding: 84px 16px 22px;
+    gap: 10px;
+  }
+
+  .hero__subtitle {
+    font-size: 16px;
+    line-height: 1.45;
+    max-width: 100%;
+  }
+
+  .hero__search {
+    flex-direction: column;
+    border-radius: 16px;
+    overflow: visible;
+    background: transparent;
+    box-shadow: none;
+    gap: 16px;
+    width: 288px;
+    max-width: 288px;
+    margin-left: auto;
+    margin-right: auto;
+    align-self: center;
+  }
+
+  .hero__input {
+    flex: none;
+    background: #fff;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+    padding: 0 18px;
+    font-size: 15px;
+  }
+
+  .hero__search-btn {
+    font-size: 15px;
+    box-shadow: 0 8px 18px rgba(47, 113, 229, 0.24);
+  }
+
+  .hero__input,
+  .hero__search-btn {
+    width: 288px;
+    height: 56px;
+    border-radius: 100px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero {
+    min-height: 536px;
+  }
+
+  .hero__title {
+    font-size: 36px;
+  }
+
+  .hero__content {
+    padding-top: 88px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 18px;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 414px) {
+  .hero {
+    min-height: 532px;
+  }
+
+  .hero__title {
+    font-size: 35px;
+  }
+
+  .hero__content {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 18px;
+  }
+
+  .hero__search {
+    gap: 16px;
+  }
+
+  .hero__search,
+  .hero__input,
+  .hero__search-btn {
+    width: 288px;
+    max-width: 288px;
+  }
+
+  .search-status {
+    padding: 30px 15px;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero {
+    min-height: 528px;
+  }
+
+  .hero__title {
+    font-size: 34px;
+  }
+
+  .hero__content {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+  }
+
+  .hero__search {
+    gap: 16px;
+  }
+
+  .hero__search,
+  .hero__input,
+  .hero__search-btn {
+    width: 288px;
+    max-width: 288px;
+  }
+
+  .search-status {
+    padding: 30px 14px;
+  }
+}
+
+@media (max-width: 375px) {
+  .hero__title {
+    font-size: 33px;
+  }
+
+  .hero__content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero {
+    min-height: 520px;
+  }
+
+  .hero__title {
+    font-size: 32px;
+    line-height: 1.12;
+  }
+
+  .hero__subtitle {
+    font-size: 15px;
+  }
+
+  .hero__content {
+    padding-top: 86px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 14px;
+  }
+
+  .hero__search {
+    gap: 16px;
+  }
+
+  .hero__input,
+  .hero__search-btn {
+    width: 288px;
+    height: 56px;
+  }
+
+  .search-status {
+    padding: 28px 12px;
+  }
+}
+
+/* ── Search status / preloader section ── */
+.search-status {
+  background: #f5f6f7;
+  padding: 80px 104px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.search-status--loading {
+  min-height: 282px;
+  padding-top: 0;
+  padding-bottom: 0;
+  justify-content: center;
+}
+
+.search-status--empty .search-status__title {
+  margin: 0 0 16px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #1a1b22;
+}
+
+.search-status--empty {
+  min-height: 374px;
+  justify-content: center;
+  gap: 0;
+}
+
+.search-status__icon {
+  width: 82px;
+  height: 82px;
+  margin-bottom: 24px;
+}
+
+.search-status__text {
+  margin: 0;
+  max-width: 356px;
+  font-size: 18px;
+  line-height: 1.33;
+  color: #b6bcbf;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .search-status {
+    padding: 32px 16px;
+  }
+
+  .search-status--loading {
+    min-height: 220px;
+  }
+
+  .search-status--empty {
+    min-height: 300px;
+  }
+}

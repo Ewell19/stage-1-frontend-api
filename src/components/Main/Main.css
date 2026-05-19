@@ -32,7 +32,7 @@
   z-index: 1;
   width: 100%;
   max-width: 1440px;
-  padding: 172px 104px 80px;
+  padding: 104px 104px 80px 163px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -46,15 +46,20 @@
   line-height: 40px;
   letter-spacing: 0px;
   color: #fff;
-  max-width: 620px;
+  width: 385px;
+  max-width: 385px;
 }
 
 .hero__subtitle {
   margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 24px;
+  letter-spacing: 0px;
   color: rgba(255, 255, 255, 0.88);
-  max-width: 600px;
+  width: 452px;
+  max-width: 452px;
 }
 
 .hero__search {

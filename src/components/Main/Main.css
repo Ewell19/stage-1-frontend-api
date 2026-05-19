@@ -65,7 +65,10 @@
 .hero__search {
   display: flex;
   margin-top: 16px;
-  max-width: 608px;
+  width: 452px;
+  max-width: 452px;
+  height: 56px;
+  border: 1px solid rgba(209, 210, 214, 0.8);
   background: #fff;
   border-radius: 40px;
   overflow: hidden;
@@ -74,7 +77,8 @@
 
 .hero__input {
   flex: 1;
-  height: 64px;
+  min-width: 0;
+  height: 56px;
   border: none;
   outline: none;
   padding: 0 24px;
@@ -88,8 +92,10 @@
 }
 
 .hero__search-btn {
-  height: 64px;
-  padding: 0 40px;
+  width: 160px;
+  flex: 0 0 160px;
+  height: 56px;
+  padding: 0;
   border: none;
   border-radius: 40px;
   background: #2f71e5;

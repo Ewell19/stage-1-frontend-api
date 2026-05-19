@@ -1,0 +1,197 @@
+.about {
+  padding: 88px 40px 96px;
+  background: #fff;
+}
+
+.about__container {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 76px;
+}
+
+.about__photo-wrap {
+  flex-shrink: 0;
+}
+
+.about__photo-btn {
+  position: relative;
+  display: block;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.about__photo-btn--static {
+  cursor: default;
+}
+\n .about__photo-btn:focus-visible {
+  outline: 3px solid #2f71e5;
+  outline-offset: 4px;
+}
+
+.about__photo-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.about__photo-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.about__photo-btn:hover .about__photo-overlay,
+.about__photo-btn:focus-visible .about__photo-overlay {
+  opacity: 1;
+}
+
+.about__photo-overlay-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1;
+}
+
+.about__photo-placeholder {
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: #b6bcca;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  padding: 32px;
+}
+
+.about__photo-caption {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.about__body {
+  width: 424px;
+  max-width: 424px;
+  padding-top: 24px;
+}
+
+.about__title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: 0px;
+  color: #1f1f1f;
+  margin: 0 0 24px;
+  width: 424px;
+  max-width: 424px;
+}
+
+.about__text {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #444;
+  margin: 0 0 16px;
+}
+
+.about__text:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .about {
+    padding: 40px;
+  }
+
+  .about__container {
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  .about__photo-btn,
+  .about__photo-placeholder {
+    width: 232px;
+    height: 232px;
+  }
+
+  .about__body {
+    max-width: 424px;
+    padding-top: 0;
+  }
+
+  .about__title {
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+
+  .about__text {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .about {
+    padding: 48px 20px;
+  }
+
+  .about__container {
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about__body {
+    padding-top: 0;
+  }
+
+  .about__photo-placeholder {
+    width: 200px;
+    height: 200px;
+  }
+
+  .about__photo-btn {
+    width: 200px;
+    height: 200px;
+  }
+
+  .about__photo-placeholder {
+    width: 200px;
+    height: 200px;
+  }
+
+  .about__title {
+    font-family: 'Roboto Slab', serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 40px;
+    letter-spacing: 0px;
+  }
+}

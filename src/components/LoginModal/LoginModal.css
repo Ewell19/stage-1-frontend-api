@@ -1,0 +1,60 @@
+/* LoginModal styles */
+
+.login-modal {
+  width: 430px;
+  min-height: 380px;
+  padding: 30px 28px 24px;
+}
+
+.login-modal .modal__header {
+  margin-bottom: 18px;
+}
+
+.login-modal .modal__title {
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.login-modal__form {
+  gap: 18px;
+}
+
+.login-modal .modal__field {
+  gap: 4px;
+}
+
+.login-modal .modal__label {
+  font-size: 14px;
+}
+
+.login-modal .modal__input--underline {
+  padding: 6px 0 8px;
+  font-size: 16px;
+}
+
+.login-modal .modal__submit {
+  height: 52px;
+  margin-top: 2px;
+  font-size: 16px;
+}
+
+.modal__switch {
+  margin: 0;
+  text-align: center;
+  font-size: 15px;
+  color: #6b6b6b;
+}
+
+.modal__switch-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 15px;
+  color: #2f71e5;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.modal__switch-link:hover {
+  text-decoration: underline;
+}

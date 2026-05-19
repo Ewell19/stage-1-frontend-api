@@ -1,0 +1,99 @@
+.register-modal {
+  width: 430px;
+  min-height: 430px;
+}
+
+.register-modal__form {
+  gap: 18px;
+}
+
+.register-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.register-modal__actions {
+  display: block;
+  margin-top: 4px;
+}
+
+.register-modal__actions .modal__submit {
+  width: 100%;
+}
+
+.register-modal__signin {
+  background: transparent;
+  border: none;
+  color: rgba(47, 113, 229, 1);
+  font-size: 15px;
+  line-height: 1.2;
+  padding: 0;
+  cursor: pointer;
+}
+
+.register-modal__switch {
+  margin: 0;
+  text-align: center;
+  font-size: 15px;
+  color: #6b6b6b;
+}
+
+.register-modal__error {
+  margin: 0;
+  color: #ff5a52;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.register-modal--success {
+  width: 470px;
+  min-height: 190px;
+  padding: 24px 36px 26px;
+}
+
+.register-modal__success {
+  min-height: 140px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.register-modal__success-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 12px;
+  padding-top: 2px;
+  text-align: left;
+}
+
+.register-modal__success-title {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 700;
+  max-width: 390px;
+}
+
+.register-modal__success-link {
+  background: transparent;
+  border: none;
+  color: rgba(47, 113, 229, 1);
+  font-size: 16px;
+  line-height: 1.2;
+  padding: 0;
+  cursor: pointer;
+}
+
+@media (max-width: 520px) {
+  .register-modal {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .register-modal__success-title {
+    font-size: 26px;
+  }
+}

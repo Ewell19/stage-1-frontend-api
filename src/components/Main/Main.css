@@ -32,12 +32,10 @@
   z-index: 1;
   width: 100%;
   max-width: 1440px;
-  padding: 104px 104px 80px;
+  padding: 104px 104px 80px 163px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 20px;
-  text-align: center;
 }
 
 .hero__title {
@@ -208,6 +206,9 @@
   }
 
   .hero__search-btn {
+    width: 288px;
+    flex: none;
+    padding: 0;
     font-size: 15px;
     box-shadow: 0 8px 18px rgba(47, 113, 229, 0.24);
   }
